@@ -9,7 +9,7 @@ export default class MovieApiService {
   _baseUrl = 'https:api.themoviedb.org';
 
   fetchCards() {
-    return fetch(`${this._baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this.itemToSearch}`)
+    return fetch(`${this._baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this.itemToSearch}&page=${this.page}`)
       .then(res => {
         if (!res.ok) {
           throw new Error(res.status);
