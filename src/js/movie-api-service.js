@@ -16,9 +16,6 @@ export default class MovieApiService {
         }
         return res.json();
       })
-      .then(data => {
-        return data.results;
-      });
   }
 
   incrementPage() {
