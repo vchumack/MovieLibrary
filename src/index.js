@@ -1,1 +1,2 @@
-import './js/paginator-markup'
+import { refs } from './js/refs';
+import './js/paginator-markup';
