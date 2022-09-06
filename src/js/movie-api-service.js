@@ -18,6 +18,16 @@ export default class MovieApiService {
       })
   }
 
+  fetchGenresName() {
+    return fetch(`${this._baseUrl}/genre/movie/list?api_key=${API_KEY}&query=${this.itemToSearch}&page=${this.page}`)
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(res.status);
+        }
+        return res.json();
+      })
+  }
+
   incrementPage() {
     this.page += 1;
   }
