@@ -1,0 +1,48 @@
+<div class="backdrop hidden section" data-modal>
+	<div class="modal container">
+		<button class="modal__btn-close" type="button" data-modal-close>
+			<svg>
+        <use href="./images/sprite/sprite.svg#icon-close">
+          
+        </use>
+			</svg>
+		</button>
+
+		<img src="./images/favorite.svg" alt=" " width="240" height="357" />
+
+		<div>
+			<table>
+				<caption class="modal__filmname">
+					Film name
+				</caption>
+				<tbody>
+					<tr>
+						<td class="modal__subtitle">Vote / Votes</td>
+						<td class="modal__">
+							<span class="modal__vote"></span> /
+							<span class="modal__number"></span>
+						</td>
+					</tr>
+					<tr>
+						<td class="modal__subtitle">Popularity</td>
+						<td class="modal__number"></td>
+					</tr>
+					<tr>
+						<td class="modal__subtitle">Original Title</td>
+						<td class="modal__text modal__text--uppercase"></td>
+					</tr>
+					<tr>
+						<td class="modal__subtitle">Genre</td>
+						<td class="modal__text"></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2 class="modal__title">about</h2>
+			<p class="modal__anotation"></p>
+
+			<button type="button" data-add-to-watched>ADD TO WATCHED</button>
+			<button type="button" data-add-to-queue>ADD TO QUEUE</button>
+		</div>
+	</div>
+</div>
