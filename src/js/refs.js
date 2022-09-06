@@ -3,5 +3,6 @@ export const refs = {
 	paginatorDiv: document.querySelector('.paginator'),
 	decrementBtn: document.querySelector('#btnBack'),
 	incrementBtn: document.querySelector('#btnForward'),
-  filmsContainer: document.querySelector('.js-films-container'),
+	filmsContainer: document.querySelector('.js-films-container'),
+	filmsUl: document.querySelector('.films')
 };
