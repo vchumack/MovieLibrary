@@ -78,4 +78,4 @@ export class MovieApiService {
   set search(newSearch) {
     this.itemToSearch = newSearch;
   }
-};
+}
