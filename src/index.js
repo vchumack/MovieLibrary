@@ -5,7 +5,7 @@ import './js/paginator-markup';
 
 const movieApiService = new MovieApiService;
 
-movieApiService.fetchCards().then(films => filmCardsMarkup(films.results));
+movieApiService.fetchCards().then(films => renderFilmCards(films.results))
 
 
 console.log(movieApiService);
