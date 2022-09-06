@@ -1,12 +1,9 @@
+import { refs } from './refs';
+
 export default function filmCardsMarkup(films) {
-  const items = films
-    .map(({
-      title,
-      genre_ids,
-      release_date = '--',
-      poster_path,
-    }) => {
-      return `
+	const items = films.map(
+		({ title, genre_ids, release_date = '--', poster_path }) => {
+			return `
         <li class="films__item">
             <img 
                 class="films__img" 
@@ -17,8 +14,9 @@ export default function filmCardsMarkup(films) {
             <p class="films__year">${release_date.slice(0, 4)}</p>
         </li>
       `;
-    })
-    .join('');
+		}
+	);
 
-  return `<ul class="films">${items}</ul>`;
+	refs.filmsUl.innerHTML = items.join('');
 }
+console.log(refs.filmsUl);

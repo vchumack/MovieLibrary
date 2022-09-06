@@ -1,49 +1,20 @@
 import { refs } from './refs';
+import {MovieApiService} from './movie-api-service'
+// import Pagination from 'tui-pagination';
 
-API_KEY = '407d4e26fe6158c959ba633b835fa721';
-class CardApiService {
-	constructor() {
-		this.itemToSearch = '';
-		this.page = 1;
-	}
 
-	fetchCards() {
-		return fetch(
-			// https://api.themoviedb.org/3/movie/566574?api_key=407d4e26fe6158c959ba633b835fa721
-			`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=sherlock holmes`
-		).then(r => {
-			if (!r.ok) {
-				throw new Error(r.status);
-			}
-			return r.json();
-		});
-		// .then(data => {
-		// 	console.log(data);
-		// 	return data;
-		// });
-	}
+// const container = document.getElementById('pagination');
 
-	incrementPage() {
-		this.page += 1;
-	}
-	decrementPage() {
-		this.page -= 1;
-	}
-	resetPage() {
-		this.page = 1;
-	}
-	get search() {
-		return this.itemToSearch;
-	}
+// var pagination2 = new tui.Pagination(document.getElementById('pagination2'), {
+// 	totalItems: 500,
+// 	itemsPerPage: 20,
+// 	visiblePages: 5,
+// 	centerAlign: true,
+// });
 
-	set search(newSearch) {
-		this.itemToSearch = newSearch;
-	}
-}
+const movieApiService1 = new MovieApiService();
 
-const cardApiService = new CardApiService();
-
-cardApiService.fetchCards().then(({ total_pages, page }) => {
+movieApiService1.fetchCards().then(({ total_pages, page }) => {
 	const btnResult = [];
 
 	for (let i = 1; i <= total_pages; i += 1) {
@@ -68,12 +39,14 @@ refs.decrementBtn.addEventListener('click', onBtnBack);
 refs.incrementBtn.addEventListener('click', onBtnForward);
 
 function onBtnBack() {
-	cardApiService.decrementPage();
 	console.log('hi - ');
+	movieApiService1.decrementPage();
+	
 }
 
 function onBtnForward() {
-	cardApiService.incrementPage();
 	console.log('gi +');
+	movieApiService1.incrementPage();
+	
 }
 console.log(refs.decrementBtn);
