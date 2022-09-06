@@ -1,5 +1,6 @@
 import { refs } from './js/refs';
-import './js/paginator-markup';import './js/modal-fetch'
+import './js/paginator-markup';
+import './js/header';;import './js/modal-fetch'
 import filmCardsMarkup from './js/film-cards-markup'
 import MovieApiService from './js/movie-api-service'
 
