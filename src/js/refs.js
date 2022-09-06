@@ -1,3 +1,3 @@
 const refs = {
-    body: document.querySelector('body')
+	body: document.querySelector('body'),
 };
