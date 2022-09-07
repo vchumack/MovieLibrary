@@ -97,7 +97,11 @@ export class MovieService {
 		return this._transformFilms(data);
 	}
 
-	async fetchMovieByID(id) {}
+  async fetchMovieByID(id) {
+    const { data } = await this.#MovieApiService.fetchMovieByID(id);
+    return this._transformFilms(data);
+  }
+
 
 	async getMovieBySearch(searchParams) {
 		this.#MovieApiService.itemToSearch = searchParams;

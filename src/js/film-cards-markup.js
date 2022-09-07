@@ -1,4 +1,5 @@
 import { refs } from './refs';
+import { onModalOpen } from './modal-fetch'
 
 export default function filmCardsMarkup(films) {
 	const items = films.map(
@@ -22,7 +23,6 @@ export default function filmCardsMarkup(films) {
 	);
 
 	refs.filmsUl.innerHTML = items.join('');
-	refs.filmsUl.addEventListener('click', (event) => {
-		console.log(event.target.closest('li').id)
-	});
+	refs.filmsUl.addEventListener('click', onModalOpen)
+
 };
