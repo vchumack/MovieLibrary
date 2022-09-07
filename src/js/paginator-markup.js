@@ -1,7 +1,6 @@
 import { refs } from './refs';
-import {MovieApiService} from './movie-api-service'
+import { MovieApiService } from './movie-api-service';
 // import Pagination from 'tui-pagination';
-
 
 // const container = document.getElementById('pagination');
 
@@ -21,10 +20,10 @@ movieApiService1.fetchCards().then(({ total_pages, page }) => {
 		console.log(i);
 		function active() {
 			if (i === page) {
-			return 'paginator__page--active';
+				return 'paginator__page--active';
 			}
-			return ''
-		};
+			return '';
+		}
 		btnResult.push(
 			`<button type="button" id="${i}" class="paginator__page ${active()}">${i}</button>`
 		);
@@ -41,12 +40,10 @@ refs.incrementBtn.addEventListener('click', onBtnForward);
 function onBtnBack() {
 	console.log('hi - ');
 	movieApiService1.decrementPage();
-	
 }
 
 function onBtnForward() {
 	console.log('gi +');
 	movieApiService1.incrementPage();
-	
 }
 console.log(refs.decrementBtn);
