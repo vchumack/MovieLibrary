@@ -1,13 +1,12 @@
 const refs = {
-    btnClose: document.querySelector('.modal__btn-close'),
-    btnAddToWatched: document.querySelector('[data-add-to-watched]'),
-    btnAddToQueue: document.querySelector('[data-add-to-queue]'),
-    backdropTouch: document.querySelector('[data-modal]'),
-    
+	btnClose: document.querySelector('.modal__btn-close'),
+	btnAddToWatched: document.querySelector('[data-add-to-watched]'),
+	btnAddToQueue: document.querySelector('[data-add-to-queue]'),
+	backdropTouch: document.querySelector('[data-modal]'),
 };
 
-refs.btnClose.addEventListener('click', closeModal);
-refs.btnAddToWatched.addEventListener('click', addToWatched);
-refs.btnAddToQueue.addEventListener('click', addToQueue);
+// refs.btnClose.addEventListener('click', closeModal);
+// refs.btnAddToWatched.addEventListener('click', addToWatched);
+// refs.btnAddToQueue.addEventListener('click', addToQueue);
 
-refs.backdropTouch.addEventListener('touch', );
+// refs.backdropTouch.addEventListener('touch', );
