@@ -14,7 +14,7 @@ export class MovieApiService {
 		});
 	}
 
-	_baseUrl = 'https:api.themoviedb.org';
+	_baseUrl = 'https://api.themoviedb.org';
 	_genres = {};
 
 	fetchCards() {
