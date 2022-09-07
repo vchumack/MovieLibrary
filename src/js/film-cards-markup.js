@@ -10,7 +10,7 @@ export default function filmCardsMarkup(films) {
         <li class="films__item" id=${id}>
             <img 
                 class="films__img" 
-                src="https://image.tmdb.org/t/p/w500/${imageSrc}" 
+                src=${imageSrc} 
                 alt="${title}">
             <h3 class="films__title">${title}</h3>
             <p class="films__descr">${genreNames.join(
