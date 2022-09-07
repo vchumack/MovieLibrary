@@ -6,18 +6,16 @@ export class MovieApiService {
 	constructor() {
 		this.itemToSearch = '';
 		this.page = 1;
-		const outerThis = this;
-		new Promise((resolve, reject) => {
-			setTimeout(() => {
-				outerThis._genres = 5;
-			}, 2000);
-		});
 	}
 
 	_baseUrl = 'https://api.themoviedb.org';
-	_genres = {};
 
-	fetchCards() {
+	fetchGenres() {
+		return axios.get(
+			`${this._baseUrl}/3/genre/movie/list?api_key=${API_KEY}&query=${this.itemToSearch}&page=${this.page}`
+		);
+	}
+	fetchMoviesBySearch() {
 		return axios.get(
 			`${this._baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this.itemToSearch}&page=${this.page}`
 		);
@@ -49,5 +47,61 @@ export class MovieApiService {
 	set search(newSearch) {
 		// console.log(this.itemToSearch);
 		return (this.itemToSearch = newSearch);
+	}
+}
+
+export class MovieService {
+	#MovieApiService = new MovieApiService();
+	constructor() {
+		this._getGenres();
+	}
+
+	_genres = {};
+	async _getGenres() {
+		const {
+			data: { genres },
+		} = await this.#MovieApiService.fetchGenres();
+		console.log(genres);
+		this._genres = genres.reduce(
+			(acc, { id, name }) => ({ ...acc, [id]: name }),
+			{}
+		);
+	}
+	_transformFilms(filmsData) {
+		const transformedFilms = filmsData.results.map(film => {
+			const genreNames = film.genre_ids.reduce((a, genreId) => {
+				const genreName = this._genres[genreId];
+				if (genreName !== undefined) {
+					return [...a, genreName];
+				}
+				return a;
+			}, []);
+
+			return { ...film, genreNames };
+		});
+		return {
+			...filmsData,
+			results: transformedFilms,
+		};
+	}
+
+	async getMovies() {
+		const movies = await this.#MovieApiService.fetchMovies();
+		console.log(movies);
+		return;
+	}
+
+	async getTrendMovies() {
+		const { data } = await this.#MovieApiService.fetchTrendMovies();
+		console.log(data);
+		return this._transformFilms(data);
+	}
+
+	async fetchMovieByID(id) {}
+
+	async getMovieBySearch(searchParams) {
+		this.#MovieApiService.itemToSearch = searchParams;
+		const { data } = await this.#MovieApiService.fetchMoviesBySearch();
+		return this._transformFilms(data);
 	}
 }

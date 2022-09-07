@@ -8,6 +8,3 @@ export const refs = {
 	filmsItem: document.querySelector('.films__item'),
 	modal: document.querySelector('[data-modal]'),
 };
-setTimeout(() => {
-	console.log('123412342134',refs.filmsItem);
-}, 2000);

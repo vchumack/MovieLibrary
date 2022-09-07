@@ -1,15 +1,15 @@
-import { MovieApiService } from './movie-api-service';
+import { MovieService } from './movie-api-service';
 import { refs } from './refs';
 import filmCardsMarkup from './film-cards-markup';
 
-const newMovieApiService = new MovieApiService();
+const movieService = new MovieService();
 
 renderMarkupTrendMovies();
 
 async function renderMarkupTrendMovies() {
 	try {
-		const movies = await newMovieApiService.fetchTrendMovies();
-		filmCardsMarkup(movies.data.results);
+		const movies = await movieService.getTrendMovies();
+		filmCardsMarkup(movies.results);
 	} catch (error) {
 		console.log(error);
 	}

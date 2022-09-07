@@ -1,7 +1,7 @@
 import debounce from 'lodash.debounce';
 // import { initializeApp } from 'firebase';
 // import { GoogleAuthProvider } from 'firebase/auth';
-import { MovieApiService } from './movie-api-service';
+import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
 import { refs } from './refs';
 
@@ -17,7 +17,7 @@ const input = document.querySelector('.header__input');
 headerLinkLibrary.addEventListener('click', onLinkLibraryClick);
 input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
-const movieApiService = new MovieApiService();
+const movieService = new MovieService();
 //авторизация
 // const provider = new GoogleAuthProvider();
 
@@ -33,11 +33,14 @@ function onLinkLibraryClick(e) {
 
 function onInputChange(e) {
 	e.preventDefault();
-	movieApiService.search = e.target.value;
+	if (e.target.value === 0) {
+		return;
+	}
+	movieService.search = e.target.value;
 
 	console.log(e.target.value);
 
-	onSearchQuery();
+	onSearchQuery(e.target.value);
 }
 
 const btnWatched = document.querySelector('.btn-watched');
@@ -58,16 +61,15 @@ function onRenderHeaderBtn() {
          <button class="btn-queue" type="button">queue</button></div>`;
 }
 
-async function onSearchQuery() {
+async function onSearchQuery(searchParams) {
 	try {
-		const apiResult = await movieApiService.fetchCards();
-		console.log(apiResult.data.results);
-		if (apiResult.data.results.length === 0) {
+		const apiResult = await movieService.getMovieBySearch(searchParams);
+		if (apiResult.results.length === 0) {
 			refs.filmsUl.innerHTML = '';
 			onUnsuccessfulSearch();
 			return;
 		}
-		filmCardsMarkup(apiResult.data.results);
+		filmCardsMarkup(apiResult.results);
 	} catch (error) {
 		console.log(error);
 	}

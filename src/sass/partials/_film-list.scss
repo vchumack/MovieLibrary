@@ -14,7 +14,15 @@
 		text-transform: uppercase;
 	}
 	&__descr {
+		display: flex;
+		flex-wrap: wrap;
 		color: #ff6b08;
+		@media screen and(min-width:768px) {
+			max-width: 336px;
+		}
+		@media screen and(min-width:1280px) {
+			max-width: 394px;
+		}
 	}
 	&__descr:first-letter {
 		text-transform: uppercase;

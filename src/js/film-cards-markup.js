@@ -2,15 +2,18 @@ import { refs } from './refs';
 
 export default function filmCardsMarkup(films) {
 	const items = films.map(
-		({ title, genre_ids, release_date = '--', poster_path, id }) => {
+		({ genreNames, title, release_date = '--', poster_path, id }) => {
+			const imageSrc = poster_path
+				? `https://image.tmdb.org/t/p/w500/${poster_path}`
+				: 'https://via.placeholder.com/395x574';
 			return `
-        <li class="films__item">
-            <img id=${id}
+        <li class="films__item" id=${id}>
+            <img 
                 class="films__img" 
-                src="https://image.tmdb.org/t/p/w500/${poster_path}" 
+                src="https://image.tmdb.org/t/p/w500/${imageSrc}" 
                 alt="${title}">
             <h3 class="films__title">${title}</h3>
-            <p class="films__descr">${genre_ids.join(
+            <p class="films__descr">${genreNames.join(
 							', '
 						)} | ${release_date.slice(0, 4)}</p>
         </li>
@@ -19,6 +22,7 @@ export default function filmCardsMarkup(films) {
 	);
 
 	refs.filmsUl.innerHTML = items.join('');
-}
-console.log(refs.filmsUl);
-console.log('====>', refs.filmsItem);
+	refs.filmsUl.addEventListener('click', (event) => {
+		console.log(event.target.closest('li').id)
+	});
+};
