@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-API_KEY = '407d4e26fe6158c959ba633b835fa721';
+const API_KEY = '407d4e26fe6158c959ba633b835fa721';
 
 export class MovieApiService {
 	constructor() {
