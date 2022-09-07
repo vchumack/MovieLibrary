@@ -1,8 +1,10 @@
+import axios from 'axios';
+
 API_KEY = '407d4e26fe6158c959ba633b835fa721';
 
 export class MovieApiService {
 	constructor() {
-		this.itemToSearch = 'thief';
+		this.itemToSearch = '';
 		this.page = 1;
 		const outerThis = this;
 		new Promise((resolve, reject) => {
@@ -14,15 +16,21 @@ export class MovieApiService {
 
 	_baseUrl = 'https:api.themoviedb.org';
 	_genres = {};
+
 	fetchCards() {
-		return fetch(
+		return axios.get(
 			`${this._baseUrl}/3/search/movie?api_key=${API_KEY}&query=${this.itemToSearch}&page=${this.page}`
-		).then(res => {
-			if (!res.ok) {
-				throw new Error(res.status);
-			}
-			return res.json();
-		});
+		);
+	}
+
+	fetchTrendMovies() {
+		return axios.get(
+			`${this._baseUrl}/3/trending/movie/day?api_key=${API_KEY}`
+		);
+	}
+
+	fetchMovieByID(id) {
+		return axios.get(`${this._baseUrl}/3/movie/${id}?api_key=${API_KEY}`);
 	}
 
 	incrementPage() {
@@ -39,6 +47,7 @@ export class MovieApiService {
 	}
 
 	set search(newSearch) {
-		this.itemToSearch = newSearch;
+		// console.log(this.itemToSearch);
+		return (this.itemToSearch = newSearch);
 	}
 }

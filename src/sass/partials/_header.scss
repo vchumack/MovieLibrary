@@ -308,8 +308,15 @@ header.header--bgc {
 }
 
 
+.btn-watched:hover,
 .btn-watched:focus,
+.btn-queue:hover,
 .btn-queue:focus {
+   border: 0px;
+   background-color: #a5522674;
+}
+
+.btn-active {
    border: 0px;
    background-color: var(--accent-color);
 }
@@ -347,4 +354,16 @@ header.header--bgc {
    @media screen and (min-width: 768px) and (max-width: 1199px) {}
 
 
+}
+
+.google-btn {
+   text-transform: uppercase;
+   color: var(--secondary-font);
+
+   font-size: 12px;
+   line-height: 1.33;
+
+   border-color: var(--secondary-font);
+   border-radius: 5px;
+   background-color: transparent;
 }

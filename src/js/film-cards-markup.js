@@ -2,10 +2,10 @@ import { refs } from './refs';
 
 export default function filmCardsMarkup(films) {
 	const items = films.map(
-		({ title, genre_ids, release_date = '--', poster_path }) => {
+		({ title, genre_ids, release_date = '--', poster_path, id }) => {
 			return `
         <li class="films__item">
-            <img 
+            <img id=${id}
                 class="films__img" 
                 src="https://image.tmdb.org/t/p/w500/${poster_path}" 
                 alt="${title}">
