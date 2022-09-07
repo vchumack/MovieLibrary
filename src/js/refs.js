@@ -7,5 +7,6 @@ export const refs = {
 	filmsUl: document.querySelector('.films'),
 	filmsItem: document.querySelector('.films__item'),
 	modal: document.querySelector('[data-modal]'),
+  modalClose: document.querySelector('[data-modal-close]'),
 	modalWrapper: document.querySelector('.modal--wrapper'),
 };

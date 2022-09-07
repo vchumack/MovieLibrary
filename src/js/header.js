@@ -5,17 +5,15 @@ import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
 import { refs } from './refs';
 
-const DEBOUNCE_DELAY = 500;
-
 const headerDivBox = document.querySelector('.js-box');
 onRenderHeaderInput();
 const headerLinkLibrary = document.querySelector('#library');
 const headerLinkHome = document.querySelector('#home');
 const header = document.querySelector('header');
-const input = document.querySelector('.header__input');
+const form = document.querySelector('#search-form');
 
 headerLinkLibrary.addEventListener('click', onLinkLibraryClick);
-input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
+form.addEventListener('submit', onFormSubmit);
 
 const movieService = new MovieService();
 //авторизация
@@ -31,25 +29,21 @@ function onLinkLibraryClick(e) {
 	headerLinkHome.classList.remove('nav-list__link--active');
 }
 
-function onInputChange(e) {
+function onFormSubmit(e) {
 	e.preventDefault();
-	if (e.target.value === 0) {
-		return;
-	}
-	movieService.search = e.target.value;
 
-	console.log(e.target.value);
+	movieService.search = e.currentTarget.elements.movieSearch.value;
 
-	onSearchQuery(e.target.value);
+	onSearchQuery(e.currentTarget.elements.movieSearch.value);
 }
 
-const btnWatched = document.querySelector('.btn-watched');
-
 function onRenderHeaderInput() {
-	headerDivBox.innerHTML = `<label class="header__label">
+	headerDivBox.innerHTML = `<form class="search-form" id="search-form">
+	<label class="header__label">
             <input class="header__input" type="text" name="movieSearch" placeholder="Movie search">
-            <span class="img__search"/>
-         </label>`;
+            <button type="submit" class="header__submit"></button>
+         </label>
+			</form>`;
 }
 
 function onClearHeaderInput() {
@@ -79,8 +73,3 @@ function onUnsuccessfulSearch() {
 	console.log('Unfortunately, your search returned no results.');
 	refs.filmsUl.innerHTML = `<p class="filmsText--unsuccess">Unfortunately, your search returned no results</p>`;
 }
-// btnWatched.addEventListener('click', onBtnWatchedClick);
-
-// function onBtnWatchedClick() {
-// 	btnWatched.classList.add('btn-active');
-// }
