@@ -1,6 +1,6 @@
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 
-const DEBOUNCE_DELAY = 500;
+// const DEBOUNCE_DELAY = 500;
 
 const headerDivBox = document.querySelector('.js-box');
 onRenderHeaderInput();

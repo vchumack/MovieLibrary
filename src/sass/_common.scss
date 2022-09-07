@@ -39,6 +39,11 @@ img {
 	display: block;
 }
 
+p{
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	font-family: var(--main-font);
 	font-weight: 500;
@@ -61,7 +66,7 @@ body {
 	@media screen and (min-width: 768px) {
 		padding-top: 60px;
 		padding-bottom: 60px;
-    }
+	}
 }
 
 .container {
@@ -92,4 +97,5 @@ body {
 	clip-path: inset(100%);
 	clip: rect(0 0 0 0);
 	overflow: hidden;
+	pointer-events: none;
 }

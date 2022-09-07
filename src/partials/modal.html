@@ -1,17 +1,57 @@
-<div class="backdrop hidden section" data-modal>
-	<div class="modal container">
+<div class="backdrop container" data-modal>
+	<div class="modal">
 		<button class="modal__btn-close" type="button" data-modal-close>
-			<svg>
-        <use href="./images/sprite/sprite.svg#icon-close">
-          
-        </use>
+			<svg width="15" height="15" class="modal__close-icon">
+				<use href="./images/sprite/sprite.svg#icon-close"></use>
 			</svg>
 		</button>
 
-		<img src="./images/favorite.svg" alt=" " width="240" height="357" />
+		<div class="modal--wrapper">
+			<img
+				src="./images/favorite.svg"
+				alt=" "
+				width="240"
+				height="357"
+				class="modal__img"
+			/>
 
-		<div>
-			<table>
+			<div class="modal__details">
+				<h2 class="modal__film-name">Film name</h2>
+
+				<div class="modal__ratings--wrapper">
+					<div class="modal__ratings--key">
+						<p>Vote / Votes</p>
+						<p>Popularity</p>
+						<p>Original Title</p>
+						<p>Genre</p>
+					</div>
+					<div class="modal__ratings--value">
+						<p>
+							<span class="modal__vote">100</span> /
+							<span class="modal__votes">100</span>
+						</p>
+						<p>1</p>
+						<p class="modal__original-title">1</p>
+						<p>1</p>
+					</div>
+				</div>
+				<h3 class="modal__about">about</h3>
+				<p class="modal__meta"></p>
+				<div class="modal__button--wrapper">
+					<button
+						type="button"
+						data-add-to-watched
+						class="modal__button--watched"
+					>
+						ADD TO WATCHED
+					</button>
+					<button type="button" data-add-to-queue class="modal__button--queue">
+						ADD TO QUEUE
+					</button>
+				</div>
+			</div>
+
+			<!-- <table>
 				<caption class="modal__filmname">
 					Film name
 				</caption>
@@ -38,11 +78,8 @@
 				</tbody>
 			</table>
 
-			<h2 class="modal__title">about</h2>
-			<p class="modal__anotation"></p>
-
-			<button type="button" data-add-to-watched>ADD TO WATCHED</button>
-			<button type="button" data-add-to-queue>ADD TO QUEUE</button>
+			<h3 class="modal__title">about</h3>
+			<p class="modal__anotation"></p> -->
 		</div>
 	</div>
 </div>
