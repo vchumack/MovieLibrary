@@ -10,3 +10,7 @@ const refs = {
 // refs.btnAddToQueue.addEventListener('click', addToQueue);
 
 // refs.backdropTouch.addEventListener('touch', );
+
+// function onClickOpen(e) {
+//     refs.modal.classList.remove('is-hidden')
+// }
