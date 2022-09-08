@@ -1,39 +1,47 @@
 import { refs } from './refs';
-import { MovieService } from './movie-api-service'
-import onKeyClose from'./modal-window'
+import { MovieService } from './movie-api-service';
+import onKeyClose from './modal-window';
 
-const movieService = new MovieService ();
+const movieService = new MovieService();
 
-export function onModalOpen (event) {
-	//!_______________не менять____________________
+export function onModalOpen(event) {
 	refs.modal.classList.remove('is-hidden');
 	refs.body.classList.add('stop-scroll');
 	refs.modal.addEventListener('keydown', onKeyClose);
-	//!_______________не менять____________________
-	
 	const filmId = event.target.closest('li').id;
 	console.log(filmId);
+
 	movieService.searchId = event.target.closest('li').id;
-	console.log(onIdSearch(event.target.closest('li').id));
+	console.log(onIdSearch(filmId));
 }
 
 async function onIdSearch(idParams) {
 	try {
-		const apiResult = await movieService.getMovieById(idParams);
-    console.log(apiResult.results)
-		modalMarkup(apiResult.results);
+		const apiResult = await movieService.getMovieByID(idParams);
+		console.log(apiResult);
+		modalMarkup(apiResult);
 	} catch (error) {
 		console.log(error);
 	}
 }
 
 function modalMarkup(film) {
-  const items = film.map(
-    ({ genreNames, title, original_title, vote_average, vote_count, backdrop_path, id, overview, popularity }) => {
-      const imageSrc = backdrop_path
-        ? `${backdrop_path}`
-        : 'https://via.placeholder.com/395x574';
-      return `
+	const items = film.map(
+		({
+			genreNames,
+			title,
+			original_title,
+			vote_average,
+			vote_count,
+			backdrop_path,
+			id,
+			overview,
+			popularity,
+		}) => {
+			const imageSrc = backdrop_path
+				? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+				: 'https://via.placeholder.com/395x574';
+			return `
         <img
 				src=${imageSrc}
 				alt="${title}"
@@ -77,8 +85,7 @@ function modalMarkup(film) {
 					</button>
 				</div>
 			</div>`;
-
-    }
-  );
-  refs.modalWrapper.innerHTML = items.join('');
-};
+		}
+	);
+	refs.modalWrapper.innerHTML = items.join('');
+}
