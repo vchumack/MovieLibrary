@@ -1,6 +1,3 @@
-import debounce from 'lodash.debounce';
-// import { initializeApp } from 'firebase';
-// import { GoogleAuthProvider } from 'firebase/auth';
 import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
 import { refs } from './refs';
@@ -16,8 +13,6 @@ headerLinkLibrary.addEventListener('click', onLinkLibraryClick);
 form.addEventListener('submit', onFormSubmit);
 
 const movieService = new MovieService();
-//авторизация
-// const provider = new GoogleAuthProvider();
 
 function onLinkLibraryClick(e) {
 	e.preventDefault();
