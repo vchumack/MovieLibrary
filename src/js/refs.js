@@ -7,6 +7,8 @@ export const refs = {
 	filmsUl: document.querySelector('.films'),
 	filmsItem: document.querySelector('.films__item'),
 	modal: document.querySelector('[data-modal]'),
+	boxTeam: document.querySelector('#box-team'),
+	footerLink: document.querySelector('.footer__link'),
   modalClose: document.querySelector('[data-modal-close]'),
 	modalWrapper: document.querySelector('.modal--wrapper'),
 };

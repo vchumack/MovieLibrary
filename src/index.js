@@ -6,5 +6,6 @@ import filmCardsMarkup from './js/film-cards-markup';
 // import './js/paginator-markup';
 import './js/modal-fetch';
 import './js/modal-window';
+import './js/team';
 
 // console.log(movieApiService);
