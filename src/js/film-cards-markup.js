@@ -1,4 +1,5 @@
 import { refs } from './refs';
+import { onModalOpen } from './modal-fetch'
 
 export default function filmCardsMarkup(films) {
 	const items = films.map(
@@ -10,7 +11,7 @@ export default function filmCardsMarkup(films) {
         <li class="films__item" id=${id}>
             <img 
                 class="films__img" 
-                src="https://image.tmdb.org/t/p/w500/${imageSrc}" 
+                src=${imageSrc} 
                 alt="${title}">
             <h3 class="films__title">${title}</h3>
             <p class="films__descr">${genreNames.join(
@@ -22,7 +23,6 @@ export default function filmCardsMarkup(films) {
 	);
 
 	refs.filmsUl.innerHTML = items.join('');
-	refs.filmsUl.addEventListener('click', (event) => {
-		console.log(event.target.closest('li').id)
-	});
+	refs.filmsUl.addEventListener('click', onModalOpen)
+
 };
