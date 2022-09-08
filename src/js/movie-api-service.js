@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_KEY = '407d4e26fe6158c959ba633b835fa721';
 
 export class MovieApiService {
+
 	constructor() {
 		this.itemToSearch = '';
 		this.idToSearch = null;
@@ -122,3 +123,4 @@ export class MovieService {
 		return this._transformFilms(data);
 	}
 }
+
