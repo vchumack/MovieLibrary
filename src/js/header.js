@@ -1,14 +1,10 @@
 import debounce from 'lodash.debounce';
 // import { initializeApp } from 'firebase';
 // import { GoogleAuthProvider } from 'firebase/auth';
-import {
-  MovieService
-} from './movie-api-service';
+import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
-import {
-  refs
-} from './refs';
-import renderPaginatorMarkup from './paginator-markup'
+import { refs } from './refs';
+import renderPaginatorMarkup from './paginator-markup';
 
 const headerDivBox = document.querySelector('.js-box');
 onRenderHeaderInput();
@@ -25,73 +21,79 @@ const movieService = new MovieService();
 // const provider = new GoogleAuthProvider();
 
 function onLinkLibraryClick(e) {
-  e.preventDefault();
-  onClearHeaderInput();
-  onRenderHeaderBtn();
-  header.classList.add('header--bgc');
+	e.preventDefault();
+	onClearHeaderInput();
+	onRenderHeaderBtn();
+	header.classList.add('header--bgc');
 
-  headerLinkLibrary.classList.add('nav-list__link--active');
-  headerLinkHome.classList.remove('nav-list__link--active');
+	headerLinkLibrary.classList.add('nav-list__link--active');
+	headerLinkHome.classList.remove('nav-list__link--active');
 }
 
 function onFormSubmit(e) {
-  e.preventDefault();
+	e.preventDefault();
 
-  if (!e.currentTarget.elements.movieSearch.value) {
-    return
-  }
+	if (!e.currentTarget.elements.movieSearch.value) {
+		return;
+	}
 
-  movieService.search = e.currentTarget.elements.movieSearch.value;
+	movieService.search = e.currentTarget.elements.movieSearch.value;
 
-  onSearchQuery(e.currentTarget.elements.movieSearch.value);
+	onSearchQuery(e.currentTarget.elements.movieSearch.value);
 }
 
 function onRenderHeaderInput() {
-  headerDivBox.innerHTML = `<form class="search-form" id="search-form">
+	headerDivBox.innerHTML = `<form class="search-form" id="search-form">
 	<label class="header__label">
             <input class="header__input" type="text" name="movieSearch" placeholder="Movie search">
             <button type="submit" class="header__submit"></button>
-         </label>
+        </label>
 			</form>`;
 }
 
 function onClearHeaderInput() {
-  headerDivBox.innerHTML = '';
+	headerDivBox.innerHTML = '';
 }
 
 function onRenderHeaderBtn() {
-  headerDivBox.innerHTML = `<div class="js-box--padding"><button class="btn-watched btn-active" type="button">Watched</button>
-         <button class="btn-queue" type="button">queue</button></div>`;
+	headerDivBox.innerHTML = `<div class="js-box--padding"><button class="btn-watched btn-active" type="button">Watched</button>
+        <button class="btn-queue" type="button">queue</button></div>`;
 }
 async function onSearchQuery(searchParams) {
-  try {
-    const apiResult = await movieService.getMovieBySearch(searchParams);
-    if (apiResult.results.length === 0) {
-      refs.filmsUl.innerHTML = '';
-      onUnsuccessfulSearch();
-      return;
-    }
-    filmCardsMarkup(apiResult.results);
+	try {
+		const apiResult = await movieService.getMovieBySearch(searchParams);
+		if (apiResult.results.length === 0) {
+			refs.filmsUl.innerHTML = '';
+			onUnsuccessfulSearch();
+			return;
+		}
+		filmCardsMarkup(apiResult.results);
 
-    renderPaginatorMarkup(apiResult.total_results, async (eventData, searchParams) => {
-      try {
-        const apiResult = await movieService.getMovieBySearch(searchParams, eventData.page);
-        if (apiResult.results.length === 0) {
-          refs.filmsUl.innerHTML = '';
-          onUnsuccessfulSearch();
-          return;
-        }
-        filmCardsMarkup(apiResult.results);
-      } catch (err) {
-        console.log(err);
-      }
-    })
-  } catch (error) {
-    console.log(error);
-  }
+		renderPaginatorMarkup(
+			apiResult.total_results,
+			async (eventData, searchParams) => {
+				try {
+					const apiResult = await movieService.getMovieBySearch(
+						searchParams,
+						eventData.page
+					);
+					if (apiResult.results.length === 0) {
+						refs.filmsUl.innerHTML = '';
+						onUnsuccessfulSearch();
+						return;
+					}
+					filmCardsMarkup(apiResult.results);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		);
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 function onUnsuccessfulSearch() {
-  console.log('Unfortunately, your search returned no results.');
-  refs.filmsUl.innerHTML = `<p class="filmsText--unsuccess">Unfortunately, your search returned no results</p>`;
+	console.log('Unfortunately, your search returned no results.');
+	refs.filmsUl.innerHTML = `<p class="filmsText--unsuccess">Unfortunately, your search returned no results</p>`;
 }

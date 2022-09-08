@@ -3,7 +3,6 @@ import axios from 'axios';
 const API_KEY = '407d4e26fe6158c959ba633b835fa721';
 
 export class MovieApiService {
-
 	constructor() {
 		this.itemToSearch = '';
 		this.idToSearch = null;
@@ -25,7 +24,7 @@ export class MovieApiService {
 
 	fetchTrendMovies() {
 		return axios.get(
-			`${this._baseUrl}/3/trending/movie/day?api_key=${API_KEY}`
+			`${this._baseUrl}/3/trending/movie/day?api_key=${API_KEY}&page=${this.page}`
 		);
 	}
 
@@ -35,15 +34,10 @@ export class MovieApiService {
 		);
 	}
 
-	incrementPage() {
-		this.page += 1;
+	setPage(page) {
+		this.page = page;
 	}
-	decrementPage() {
-		this.page -= 1;
-	}
-	resetPage() {
-		this.page = 1;
-	}
+
 	get search() {
 		return this.itemToSearch;
 	}
@@ -103,7 +97,10 @@ export class MovieService {
 		return;
 	}
 
-	async getTrendMovies() {
+	async getTrendMovies(page) {
+		if (page) {
+			this.#MovieApiService.setPage(page);
+		}
 		const { data } = await this.#MovieApiService.fetchTrendMovies();
 		console.log('SMOTRET SYDA', data);
 		return this._transformFilms(data);
@@ -117,10 +114,14 @@ export class MovieService {
 		return [{ ...data, genreNames }];
 	}
 
-	async getMovieBySearch(searchParams) {
-		this.#MovieApiService.itemToSearch = searchParams;
+	async getMovieBySearch(searchParams, page) {
+		if (searchParams) {
+			this.#MovieApiService.itemToSearch = searchParams;
+		}
+		if (page) {
+			this.#MovieApiService.setPage(page);
+		}
 		const { data } = await this.#MovieApiService.fetchMoviesBySearch();
 		return this._transformFilms(data);
 	}
 }
-
