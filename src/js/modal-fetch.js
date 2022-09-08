@@ -1,6 +1,8 @@
 import { refs } from './refs';
 import { MovieService } from './movie-api-service';
 import onKeyClose from './modal-window';
+const LOCAL_WATCHED = [];
+const LOCAL_QUEUE = [];
 
 const movieService = new MovieService();
 
@@ -12,17 +14,46 @@ export function onModalOpen(event) {
 	console.log(filmId);
 
 	movieService.searchId = event.target.closest('li').id;
-	console.log(onIdSearch(filmId));
+	onIdSearch(filmId);
 }
 
 async function onIdSearch(idParams) {
 	try {
 		const apiResult = await movieService.getMovieByID(idParams);
-		console.log(apiResult);
 		modalMarkup(apiResult);
+		
 	} catch (error) {
 		console.log(error);
 	}
+}
+
+async function onAddToWatched(e) {
+	try {
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_WATCHED.push(filmIdForLocal);
+		setLocalWatched();
+	} catch (error) {
+		console.log(error)
+	}
+	
+}
+
+function onAddToQueue(e) {
+	try {
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_QUEUE.push(filmIdForLocal);
+		setLocalQueue();
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+function setLocalWatched() {
+	localStorage.setItem('LOCAL_WATCHED', JSON.stringify(LOCAL_WATCHED));
+}
+
+function setLocalQueue() {
+	localStorage.setItem('LOCAL_QUEUE', JSON.stringify(LOCAL_QUEUE));
 }
 
 function modalMarkup(film) {
@@ -48,7 +79,7 @@ function modalMarkup(film) {
 				width="240"
 				height="357"
 				class="modal__img"
-        ${id}/>
+				id=${id}/>
 
 			<div class="modal__details">
 				<h2 class="modal__film-name">${title} </h2>
@@ -77,10 +108,16 @@ function modalMarkup(film) {
 						type="button"
 						data-add-to-watched
 						class="modal__button--watched"
-					>
+						id=${id}
+						>
 						ADD TO WATCHED
 					</button>
-					<button type="button" data-add-to-queue class="modal__button--queue">
+					<button
+						type="button"
+						data-add-to-queue
+						class="modal__button--queue"
+						id=${id}
+						>
 						ADD TO QUEUE
 					</button>
 				</div>
@@ -88,4 +125,10 @@ function modalMarkup(film) {
 		}
 	);
 	refs.modalWrapper.innerHTML = items.join('');
+	document
+		.querySelector('.modal__button--watched')
+		.addEventListener('click', onAddToWatched);
+	document
+		.querySelector('.modal__button--queue')
+		.addEventListener('click', onAddToQueue);
 }
