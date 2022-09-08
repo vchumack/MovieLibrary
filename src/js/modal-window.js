@@ -9,12 +9,11 @@ function onButtonClose(e) {
 	refs.body.classList.remove('stop-scroll');
 }
 
-function onKeyClose(e) {
+export default function onKeyClose(e) {
 	if (e.code === 'Escape') {
-		console.log('почему не работает когда стоит слушатель на крестике ???');
 		refs.modal.classList.add('is-hidden');
 		refs.body.classList.remove('stop-scroll');
-		modal.removeEventListener('keydown', onKeyClose);
+		refs.modal.removeEventListener('keydown', onKeyClose);
 	}
 }
 
