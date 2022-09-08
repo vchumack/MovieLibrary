@@ -4,8 +4,21 @@ import { MovieService } from './movie-api-service'
 const movieService = new MovieService ();
 
 export function onModalOpen (event) {
-		console.log(event.target.closest('li').id)
+    const filmId = event.target.closest('li').id
+    console.log(filmId);
     refs.modal.classList.remove('is-hidden')
+    movieService.searchId = event.target.closest('li').id
+    console.log(onIdSearch(event.target.closest('li').id))
+}
+
+async function onIdSearch(idParams) {
+	try {
+		const apiResult = await movieService.getMovieById(idParams);
+    console.log(apiResult.results)
+		modalMarkup(apiResult.results);
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 function modalMarkup(film) {
