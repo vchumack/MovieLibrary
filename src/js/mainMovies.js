@@ -1,16 +1,27 @@
-import { MovieService } from './movie-api-service';
-import { refs } from './refs';
+import {
+  MovieService
+} from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
+import renderPaginatorMarkup from './paginator-markup'
 
 const movieService = new MovieService();
 
 renderMarkupTrendMovies();
 
 async function renderMarkupTrendMovies() {
-	try {
-		const movies = await movieService.getTrendMovies();
-		filmCardsMarkup(movies.results);
-	} catch (error) {
-		console.log(error);
-	}
+  try {
+    const movies = await movieService.getTrendMovies();
+    filmCardsMarkup(movies.results);
+
+    renderPaginatorMarkup(movies.total_results, async (eventData) => {
+      try {
+        const movies = await movieService.getTrendMovies(eventData.page);
+        filmCardsMarkup(movies.results);
+      } catch (err) {
+        console.log(err);
+      }
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }

@@ -1,6 +1,7 @@
 import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
 import { refs } from './refs';
+import renderPaginatorMarkup from './paginator-markup';
 
 const headerDivBox = document.querySelector('.js-box');
 onRenderHeaderInput();
@@ -27,6 +28,10 @@ function onLinkLibraryClick(e) {
 function onFormSubmit(e) {
 	e.preventDefault();
 
+	if (!e.currentTarget.elements.movieSearch.value) {
+		return;
+	}
+
 	movieService.search = e.currentTarget.elements.movieSearch.value;
 
 	onSearchQuery(e.currentTarget.elements.movieSearch.value);
@@ -37,7 +42,7 @@ function onRenderHeaderInput() {
 	<label class="header__label">
             <input class="header__input" type="text" name="movieSearch" placeholder="Movie search">
             <button type="submit" class="header__submit"></button>
-         </label>
+        </label>
 			</form>`;
 }
 
@@ -47,9 +52,8 @@ function onClearHeaderInput() {
 
 function onRenderHeaderBtn() {
 	headerDivBox.innerHTML = `<div class="js-box--padding"><button class="btn-watched btn-active" type="button">Watched</button>
-         <button class="btn-queue" type="button">queue</button></div>`;
+        <button class="btn-queue" type="button">queue</button></div>`;
 }
-
 async function onSearchQuery(searchParams) {
 	try {
 		const apiResult = await movieService.getMovieBySearch(searchParams);
@@ -59,6 +63,26 @@ async function onSearchQuery(searchParams) {
 			return;
 		}
 		filmCardsMarkup(apiResult.results);
+
+		renderPaginatorMarkup(
+			apiResult.total_results,
+			async (eventData, searchParams) => {
+				try {
+					const apiResult = await movieService.getMovieBySearch(
+						searchParams,
+						eventData.page
+					);
+					if (apiResult.results.length === 0) {
+						refs.filmsUl.innerHTML = '';
+						onUnsuccessfulSearch();
+						return;
+					}
+					filmCardsMarkup(apiResult.results);
+				} catch (err) {
+					console.log(err);
+				}
+			}
+		);
 	} catch (error) {
 		console.log(error);
 	}

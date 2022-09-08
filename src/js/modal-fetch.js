@@ -1,40 +1,85 @@
 import { refs } from './refs';
-import { MovieService } from './movie-api-service'
+import { MovieService } from './movie-api-service';
+import onKeyClose from './modal-window';
+const LOCAL_WATCHED = [];
+const LOCAL_QUEUE = [];
 
-const movieService = new MovieService ();
+const movieService = new MovieService();
 
-export function onModalOpen (event) {
-    const filmId = event.target.closest('li').id
-    console.log(filmId);
-    refs.modal.classList.remove('is-hidden')
-    movieService.searchId = event.target.closest('li').id
-    console.log(onIdSearch(event.target.closest('li').id))
+export function onModalOpen(event) {
+	refs.modal.classList.remove('is-hidden');
+	refs.body.classList.add('stop-scroll');
+	refs.modal.addEventListener('keydown', onKeyClose);
+	const filmId = event.target.closest('li').id;
+	console.log(filmId);
+
+	movieService.searchId = event.target.closest('li').id;
+	onIdSearch(filmId);
 }
 
 async function onIdSearch(idParams) {
 	try {
-		const apiResult = await movieService.getMovieById(idParams);
-    console.log(apiResult.results)
-		modalMarkup(apiResult.results);
+		const apiResult = await movieService.getMovieByID(idParams);
+		modalMarkup(apiResult);
+		
 	} catch (error) {
 		console.log(error);
 	}
 }
 
+async function onAddToWatched(e) {
+	try {
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_WATCHED.push(filmIdForLocal);
+		setLocalWatched();
+	} catch (error) {
+		console.log(error)
+	}
+	
+}
+
+function onAddToQueue(e) {
+	try {
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_QUEUE.push(filmIdForLocal);
+		setLocalQueue();
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+function setLocalWatched() {
+	localStorage.setItem('LOCAL_WATCHED', JSON.stringify(LOCAL_WATCHED));
+}
+
+function setLocalQueue() {
+	localStorage.setItem('LOCAL_QUEUE', JSON.stringify(LOCAL_QUEUE));
+}
+
 function modalMarkup(film) {
-  const items = film.map(
-    ({ genreNames, title, original_title, vote_average, vote_count, backdrop_path, id, overview, popularity }) => {
-      const imageSrc = backdrop_path
-        ? `${backdrop_path}`
-        : 'https://via.placeholder.com/395x574';
-      return `
+	const items = film.map(
+		({
+			genreNames,
+			title,
+			original_title,
+			vote_average,
+			vote_count,
+			backdrop_path,
+			id,
+			overview,
+			popularity,
+		}) => {
+			const imageSrc = backdrop_path
+				? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+				: 'https://via.placeholder.com/395x574';
+			return `
         <img
 				src=${imageSrc}
 				alt="${title}"
 				width="240"
 				height="357"
 				class="modal__img"
-        ${id}/>
+				id=${id}/>
 
 			<div class="modal__details">
 				<h2 class="modal__film-name">${title} </h2>
@@ -63,16 +108,27 @@ function modalMarkup(film) {
 						type="button"
 						data-add-to-watched
 						class="modal__button--watched"
-					>
+						id=${id}
+						>
 						ADD TO WATCHED
 					</button>
-					<button type="button" data-add-to-queue class="modal__button--queue">
+					<button
+						type="button"
+						data-add-to-queue
+						class="modal__button--queue"
+						id=${id}
+						>
 						ADD TO QUEUE
 					</button>
 				</div>
 			</div>`;
-
-    }
-  );
-  refs.modalWrapper.innerHTML = items.join('');
-};
+		}
+	);
+	refs.modalWrapper.innerHTML = items.join('');
+	document
+		.querySelector('.modal__button--watched')
+		.addEventListener('click', onAddToWatched);
+	document
+		.querySelector('.modal__button--queue')
+		.addEventListener('click', onAddToQueue);
+}
