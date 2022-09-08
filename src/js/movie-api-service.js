@@ -5,7 +5,7 @@ const API_KEY = '407d4e26fe6158c959ba633b835fa721';
 export class MovieApiService {
 	constructor() {
 		this.itemToSearch = '';
-    this.idToSearch = null;
+		this.idToSearch = null;
 		this.page = 1;
 	}
 
@@ -29,7 +29,9 @@ export class MovieApiService {
 	}
 
 	fetchMovieByID() {
-		return axios.get(`${this._baseUrl}/3/movie/${this.idToSearch}?api_key=${API_KEY}`);
+		return axios.get(
+			`${this._baseUrl}/3/movie/${this.idToSearch}?api_key=${API_KEY}`
+		);
 	}
 
 	incrementPage() {
@@ -50,13 +52,13 @@ export class MovieApiService {
 		return (this.itemToSearch = newSearch);
 	}
 
-  get searchId(){
-    return this.idToSearch
-  }
+	get searchId() {
+		return this.idToSearch;
+	}
 
-  set searchId(newId){
-    return (this.idToSearch = newId)
-  }
+	set searchId(newId) {
+		return (this.idToSearch = newId);
+	}
 }
 
 export class MovieService {
@@ -107,15 +109,16 @@ export class MovieService {
 	}
 
 	async getMovieByID(idParams) {
-    this.#MovieApiService.idToSearch = idParams;
+		this.#MovieApiService.idToSearch = idParams;
 		const { data } = await this.#MovieApiService.fetchMovieByID();
-    console.log('AIDISHNIKI NE RNDERYATSYA?',data)
-    return this._transformFilms(data);
+		const genreNames = data.genres.map(({ name }) => name);
+		console.log('Консоль с фетча ', data);
+		return [{ ...data, genreNames }];
 	}
 
 	async getMovieBySearch(searchParams) {
 		this.#MovieApiService.itemToSearch = searchParams;
 		const { data } = await this.#MovieApiService.fetchMoviesBySearch();
-    return this._transformFilms(data);
+		return this._transformFilms(data);
 	}
 }
