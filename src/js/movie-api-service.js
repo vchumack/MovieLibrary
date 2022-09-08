@@ -5,6 +5,7 @@ const API_KEY = '407d4e26fe6158c959ba633b835fa721';
 export class MovieApiService {
   constructor() {
     this.itemToSearch = '';
+    this.idToSearch = null;
     this.page = 1;
   }
 
@@ -27,8 +28,8 @@ export class MovieApiService {
     );
   }
 
-  fetchMovieByID(id) {
-    return axios.get(`${this._baseUrl}/3/movie/${id}?api_key=${API_KEY}`);
+  fetchMovieByID() {
+    return axios.get(`${this._baseUrl}/3/movie/${this.idToSearch}?api_key=${API_KEY}`);
   }
 
   setPage(page) {
@@ -41,6 +42,14 @@ export class MovieApiService {
   set search(newSearch) {
     // console.log(this.itemToSearch);
     return (this.itemToSearch = newSearch);
+  }
+
+  get searchId() {
+    return this.idToSearch
+  }
+
+  set searchId(newId) {
+    return (this.idToSearch = newId)
   }
 }
 
@@ -102,11 +111,10 @@ export class MovieService {
     const {
       data
     } = await this._MovieApiService.fetchTrendMovies();
-    // console.log(data);
+    console.log('SMOTRET SYDA', data);
     return this._transformFilms(data);
   }
 
-  async fetchMovieByID(id) {}
 
   async getMovieBySearch(searchParams, page) {
     // при нажатии на другую страницу, searchParams не приходят
@@ -119,6 +127,15 @@ export class MovieService {
     const {
       data
     } = await this._MovieApiService.fetchMoviesBySearch();
+    return this._transformFilms(data);
+  }
+
+  async getMovieByID(idParams) {
+    this._MovieApiService.idToSearch = idParams;
+    const {
+      data
+    } = await this._MovieApiService.fetchMovieByID();
+    console.log('AIDISHNIKI NE RNDERYATSYA?', data)
     return this._transformFilms(data);
   }
 }

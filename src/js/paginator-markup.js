@@ -7,7 +7,7 @@ import 'tui-pagination/dist/tui-pagination.css';
 export default function renderPaginatorMarkup(totalItems, cb) {
   document.getElementById('pagination').innerHTML = ''
 
-  let pagination = new Pagination(refs.pagination, {
+  let pagination = new Pagination(refs.paginator, {
     totalItems,
     itemsPerPage: 20,
     visiblePages: 5,
