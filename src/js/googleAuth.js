@@ -7,7 +7,7 @@ const googleAuthDiv = document.querySelector('#google-box-id');
 const KEY = 'UserData';
 
 googleAuthBtn.addEventListener('click', onGoogleAuthBtnClick);
-
+checkLocalStorageUserData();
 //авторизация
 const provider = new GoogleAuthProvider();
 // Your web app's Firebase configuration
@@ -38,7 +38,8 @@ function onGoogleAuthBtnClick() {
 			if (user.emailVerified) {
 				const userAuthData = {
 					email: user.email,
-					name: user.displayName,
+					displayName: user.displayName,
+					photoURL: user.photoURL,
 				};
 				setLocalStorageUser(KEY, userAuthData);
 				googleAuthBtn.classList.add('button-hidden');
@@ -60,11 +61,15 @@ function onGoogleAuthBtnClick() {
 		});
 }
 
-function markupUserAuth({ displayName, email, photoURL }) {
+function markupUserAuth({
+	displayName,
+	email,
+	photoURL = 'https://i7.photo.2gis.com/images/profile/844424962167907_91d6_320x.jpg',
+}) {
 	googleAuthDiv.insertAdjacentHTML(
 		'beforeend',
 		`<div class="js-box-out">
-   <img class='google-userpic' src=${photoURL} alt='${displayName}' width='30' height='30'>
+   <img class='google-userpic' src=${photoURL} width='30' height='30'>
    <div class='userdata-box'>
       <p class="google-username">${displayName}</p>
       <p class="google-email">${email}</p>
@@ -95,3 +100,15 @@ function onLogoutClick() {
 // if (!getLocalStorageUser()) {
 // 	return console.log('Авторизуйтесь, пожалуйста');
 // }
+
+function checkLocalStorageUserData() {
+	const dataUser = getLocalStorageUser(KEY);
+
+	if (dataUser) {
+		googleAuthBtn.classList.add('button-hidden');
+		googleAuthDiv.classList.add('google-box');
+		markupUserAuth(dataUser);
+		const logoutBtn = document.querySelector('.google-btn--logout');
+		logoutBtn.addEventListener('click', onLogoutClick);
+	}
+}
