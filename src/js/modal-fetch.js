@@ -1,14 +1,20 @@
 import { refs } from './refs';
 import { MovieService } from './movie-api-service'
+import './modal-window'
 
 const movieService = new MovieService ();
 
 export function onModalOpen (event) {
-    const filmId = event.target.closest('li').id
-    console.log(filmId);
-    refs.modal.classList.remove('is-hidden')
-    movieService.searchId = event.target.closest('li').id
-    console.log(onIdSearch(event.target.closest('li').id))
+	//!_______________не менять____________________
+	refs.modal.classList.remove('is-hidden');
+	refs.body.classList.add('stop-scroll');
+	modal.addEventListener('keydown', onKeyClose);
+	//!_______________не менять____________________
+	
+	const filmId = event.target.closest('li').id;
+	console.log(filmId);
+	movieService.searchId = event.target.closest('li').id;
+	console.log(onIdSearch(event.target.closest('li').id));
 }
 
 async function onIdSearch(idParams) {
