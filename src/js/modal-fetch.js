@@ -29,9 +29,13 @@ async function onIdSearch(idParams) {
 
 async function onAddToWatched(e) {
 	try {
+		const addToWatchBtn = document
+		.querySelector('.modal__button--watched');
 		const filmIdForLocal = e.target.closest('button').id;
 		LOCAL_WATCHED.push(filmIdForLocal);
 		setLocalWatched();
+		addToWatchBtn.disabled = true;
+
 	} catch (error) {
 		console.log(error)
 	}
@@ -40,9 +44,12 @@ async function onAddToWatched(e) {
 
 function onAddToQueue(e) {
 	try {
+		const addToQueue = document
+		.querySelector('.modal__button--queue');
 		const filmIdForLocal = e.target.closest('button').id;
 		LOCAL_QUEUE.push(filmIdForLocal);
 		setLocalQueue();
+		addToQueue.disabled = true;
 	} catch (error) {
 		console.log(error);
 	}
