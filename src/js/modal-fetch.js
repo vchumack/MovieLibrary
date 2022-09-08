@@ -1,6 +1,6 @@
 import { refs } from './refs';
 import { MovieService } from './movie-api-service'
-import './modal-window'
+import onKeyClose from'./modal-window'
 
 const movieService = new MovieService ();
 
@@ -8,7 +8,7 @@ export function onModalOpen (event) {
 	//!_______________не менять____________________
 	refs.modal.classList.remove('is-hidden');
 	refs.body.classList.add('stop-scroll');
-	modal.addEventListener('keydown', onKeyClose);
+	refs.modal.addEventListener('keydown', onKeyClose);
 	//!_______________не менять____________________
 	
 	const filmId = event.target.closest('li').id;

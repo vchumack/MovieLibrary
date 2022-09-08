@@ -11,4 +11,5 @@ export const refs = {
 	footerLink: document.querySelector('.footer__link'),
 	modalClose: document.querySelector('[data-modal-close]'),
 	modalWrapper: document.querySelector('.modal--wrapper'),
+	paginator: document.querySelector('#pagination')
 };
