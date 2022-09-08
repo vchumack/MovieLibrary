@@ -88,7 +88,7 @@ function onRenderTeamClick(e) {
                <p lang="en" class="team-list__text">Frontend Developer</p>
                <ul class="social-icon__list">
                   <li class="social-icon__item">
-                     <a class="social-icon__link" href="">${gitIcon} 
+                     <a class="social-icon__link" href="https://github.com/adrilix">${gitIcon} 
                      </a>
                   </li>
                   <li class="social-icon__item">
