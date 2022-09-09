@@ -72,9 +72,6 @@ function onAddToQueue(e) {
 		LOCAL_QUEUE.push(filmIdForLocal);
 		setLocalQueue();
 		addToQueue.disabled = true;
-	} catch (error) {
-		console.log(error);
-	}
 
 	Notify.success('Film is successfully added to your collection');
 
