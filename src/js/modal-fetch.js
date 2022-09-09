@@ -43,7 +43,7 @@ function onAddToWatched(e) {
 	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
 
 	if (checkIdUnique) {
-		Notify.failure('Такой фильм уже добавлен');
+		Notify.failure("That one, you've got already");
 
 		return;
 	} else {
@@ -64,7 +64,7 @@ function onAddToQueue(e) {
 	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
 
 	if (checkIdUnique) {
-		Notify.failure('Такой фильм уже добавлен');
+		Notify.failure("That one, you've got already");
 
 		return;
 	} else {
