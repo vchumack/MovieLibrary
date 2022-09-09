@@ -71,13 +71,13 @@ function modalMarkup(film) {
 			original_title,
 			vote_average,
 			vote_count,
-			backdrop_path,
+			poster_path,
 			id,
 			overview,
 			popularity,
 		}) => {
-			const imageSrc = backdrop_path
-				? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+			const imageSrc = poster_path
+				? `https://image.tmdb.org/t/p/w500/${poster_path}`
 				: 'https://via.placeholder.com/395x574';
 			return `
         <img
@@ -105,7 +105,7 @@ function modalMarkup(film) {
 						</p>
 						<p>${popularity}</p>
 						<p class="modal__original-title">${original_title}</p>
-						<p>${genreNames}</p>
+						<p class="modal__genre">${genreNames}</p>
 					</div>
 				</div>
 				<h3 class="modal__about">about</h3>
