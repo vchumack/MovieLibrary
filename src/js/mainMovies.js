@@ -2,7 +2,8 @@ import {
   MovieService
 } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
-import renderPaginatorMarkup from './paginator-markup'
+import renderPaginatorMarkup from './paginator-markup';
+import getSpinner from './loaderSpinner';
 
 const movieService = new MovieService();
 
