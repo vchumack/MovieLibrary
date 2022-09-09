@@ -4,7 +4,7 @@ import { refs } from './refs';
 
 const googleAuthBtn = document.querySelector('#google');
 const googleAuthDiv = document.querySelector('#google-box-id');
-export const KEY = 'UserData';
+const KEY = 'UserData';
 
 googleAuthBtn.addEventListener('click', onGoogleAuthBtnClick);
 checkLocalStorageUserData();
@@ -62,7 +62,7 @@ function onGoogleAuthBtnClick() {
 }
 
 function markupUserAuth({
-	displayName = 'Anonymous',
+	displayName,
 	email,
 	photoURL = 'https://i7.photo.2gis.com/images/profile/844424962167907_91d6_320x.jpg',
 }) {
@@ -81,11 +81,11 @@ function markupUserAuth({
 	);
 }
 
-export function setLocalStorageUser(KEY, data) {
+function setLocalStorageUser(KEY, data) {
 	localStorage.setItem(KEY, JSON.stringify(data));
 }
 
-export function getLocalStorageUser(KEY) {
+function getLocalStorageUser(KEY) {
 	return JSON.parse(localStorage.getItem(KEY));
 }
 
@@ -95,6 +95,11 @@ function onLogoutClick() {
 	document.querySelector('.js-box-out').remove();
 	googleAuthBtn.classList.remove('button-hidden');
 }
+
+// засунуть проверку во все функции по клику кнопок
+// if (!getLocalStorageUser()) {
+// 	return console.log('Авторизуйтесь, пожалуйста');
+// }
 
 function checkLocalStorageUserData() {
 	const dataUser = getLocalStorageUser(KEY);

@@ -71,11 +71,11 @@ function onRenderTeamClick(e) {
                <p lang="en" class="team-list__text">Frontend Developer</p>
                <ul class="social-icon__list">
                   <li class="social-icon__item">
-                     <a class="social-icon__link" href="https://github.com/LeonidLukin">  ${gitIcon} 
+                     <a class="social-icon__link" href="">  ${gitIcon} 
                      </a>
                   </li>
                   <li class="social-icon__item">
-                     <a class="social-icon__link" href="https://www.linkedin.com/in/leonid-lukin-42295a1aa">${linIcon}
+                     <a class="social-icon__link" href="">${linIcon}
                      </a>
                   </li>
                </ul>
