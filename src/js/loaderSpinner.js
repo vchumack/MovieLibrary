@@ -3,7 +3,7 @@ const getSpinner = () => {
   spinner.className = "orbit-spinner"
 
   spinner.innerHTML = `
-    <div style="position: fixed; display: flex; top: 0; left: 0; height: 10vh; width: 10vw; justify-content: center; align-items: center; ">
+    <div style="position: fixed; display: flex; top: 50%; left: 50%; height: 10vh; width: 10vw; justify-content: center; align-items: center; ">
       <div class="orbit"></div>
       <div class="orbit"></div>
       <div class="orbit"></div>
