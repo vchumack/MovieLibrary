@@ -36,54 +36,40 @@ async function onIdSearch(idParams) {
 function onAddToWatched(e) {
 	if (!getLocalStorageUser(KEY)) {
 		return Notify.failure('The service is unavailable until you authorize');
-
-		const addToWatchBtn = document
-		.querySelector('.modal__button--watched');
-		const filmIdForLocal = e.target.closest('button').id;
-		LOCAL_WATCHED.push(filmIdForLocal);
-		setLocalWatched();
-		addToWatchBtn.disabled = true;
 	}
-
-	Notify.success('Film is successfully added to your collection');
 
 	const filmIdForLocal = e.target.closest('button').id;
 	const getDataLocalHost = getLocalStorageUser('LOCAL_WATCHED') || [];
 	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
 
-	// if (checkIdUnique) {
-	// 	Notify.failure('Такой фильм уже добавлен');
+	if (checkIdUnique) {
+		Notify.failure('Такой фильм уже добавлен');
 
-	// 	return;
-	// }
+		return;
+	} else {
+		Notify.success('Film is successfully added to your collection');
+	}
 
 	LOCAL_WATCHED.push(filmIdForLocal);
 	setLocalWatched();
 }
 
 function onAddToQueue(e) {
-
 	if (!getLocalStorageUser(KEY)) {
 		return Notify.failure('The service is unavailable until you authorize');
-    
-		const addToQueue = document
-		.querySelector('.modal__button--queue');
-		const filmIdForLocal = e.target.closest('button').id;
-		LOCAL_QUEUE.push(filmIdForLocal);
-		setLocalQueue();
-		addToQueue.disabled = true;
-
-	Notify.success('Film is successfully added to your collection');
+	}
 
 	const filmIdForLocal = e.target.closest('button').id;
 	const getDataLocalHost = getLocalStorageUser('LOCAL_QUEUE') || [];
 	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
 
-	// if (checkIdUnique) {
-	// 	Notify.failure('Такой фильм уже добавлен');
+	if (checkIdUnique) {
+		Notify.failure('Такой фильм уже добавлен');
 
-	// 	return;
-	// }
+		return;
+	} else {
+		Notify.success('Film is successfully added to your collection');
+	}
 
 	LOCAL_QUEUE.push(filmIdForLocal);
 	setLocalQueue();
