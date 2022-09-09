@@ -1,8 +1,15 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { refs } from './refs';
 import { MovieService } from './movie-api-service';
 import onKeyClose from './modal-window';
-const LOCAL_WATCHED = [];
-const LOCAL_QUEUE = [];
+import { getLocalStorageUser } from './googleAuth';
+import { KEY } from './googleAuth';
+
+const LOCAL_WATCHED = getLocalStorageUser('LOCAL_WATCHED') || [];
+const LOCAL_QUEUE = getLocalStorageUser('LOCAL_QUEUE') || [];
+
+console.log(LOCAL_WATCHED);
+console.log(LOCAL_QUEUE);
 
 const movieService = new MovieService();
 
@@ -21,45 +28,72 @@ async function onIdSearch(idParams) {
 	try {
 		const apiResult = await movieService.getMovieByID(idParams);
 		modalMarkup(apiResult);
-		
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-async function onAddToWatched(e) {
-	try {
+function onAddToWatched(e) {
+	if (!getLocalStorageUser(KEY)) {
+		return Notify.failure('The service is unavailable until you authorize');
+
 		const addToWatchBtn = document
 		.querySelector('.modal__button--watched');
 		const filmIdForLocal = e.target.closest('button').id;
 		LOCAL_WATCHED.push(filmIdForLocal);
 		setLocalWatched();
 		addToWatchBtn.disabled = true;
-
-	} catch (error) {
-		console.log(error)
 	}
-	
+
+	Notify.success('Film is successfully added to your collection');
+
+	const filmIdForLocal = e.target.closest('button').id;
+	const getDataLocalHost = getLocalStorageUser('LOCAL_WATCHED') || [];
+	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
+
+	// if (checkIdUnique) {
+	// 	Notify.failure('Такой фильм уже добавлен');
+
+	// 	return;
+	// }
+
+	LOCAL_WATCHED.push(filmIdForLocal);
+	setLocalWatched();
 }
 
 function onAddToQueue(e) {
-	try {
+
+	if (!getLocalStorageUser(KEY)) {
+		return Notify.failure('The service is unavailable until you authorize');
+    
 		const addToQueue = document
 		.querySelector('.modal__button--queue');
 		const filmIdForLocal = e.target.closest('button').id;
 		LOCAL_QUEUE.push(filmIdForLocal);
 		setLocalQueue();
 		addToQueue.disabled = true;
-	} catch (error) {
-		console.log(error);
-	}
+
+	Notify.success('Film is successfully added to your collection');
+
+	const filmIdForLocal = e.target.closest('button').id;
+	const getDataLocalHost = getLocalStorageUser('LOCAL_QUEUE') || [];
+	const checkIdUnique = getDataLocalHost.find(el => el === filmIdForLocal);
+
+	// if (checkIdUnique) {
+	// 	Notify.failure('Такой фильм уже добавлен');
+
+	// 	return;
+	// }
+
+	LOCAL_QUEUE.push(filmIdForLocal);
+	setLocalQueue();
 }
 
-function setLocalWatched() {
+export function setLocalWatched() {
 	localStorage.setItem('LOCAL_WATCHED', JSON.stringify(LOCAL_WATCHED));
 }
 
-function setLocalQueue() {
+export function setLocalQueue() {
 	localStorage.setItem('LOCAL_QUEUE', JSON.stringify(LOCAL_QUEUE));
 }
 
