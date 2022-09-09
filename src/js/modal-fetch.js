@@ -4,6 +4,7 @@ import { MovieService } from './movie-api-service';
 import onKeyClose from './modal-window';
 import { getLocalStorageUser } from './googleAuth';
 import { KEY } from './googleAuth';
+import getSpinner from './loaderSpinner'
 
 const LOCAL_WATCHED = getLocalStorageUser('LOCAL_WATCHED') || [];
 const LOCAL_QUEUE = getLocalStorageUser('LOCAL_QUEUE') || [];
@@ -25,12 +26,16 @@ export function onModalOpen(event) {
 }
 
 async function onIdSearch(idParams) {
+  const spinner = getSpinner();
 	try {
+    refs.filmsUl.append(spinner);
 		const apiResult = await movieService.getMovieByID(idParams);
 		modalMarkup(apiResult);
 	} catch (error) {
 		console.log(error);
-	}
+	} finally {
+    spinner.remove()
+  }
 }
 
 function onAddToWatched(e) {
