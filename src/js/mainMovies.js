@@ -10,7 +10,9 @@ const movieService = new MovieService();
 renderMarkupTrendMovies();
 
 async function renderMarkupTrendMovies() {
+  const spinner = getSpinner();
   try {
+    refs.filmsUl.append(spinner);
     const movies = await movieService.getTrendMovies();
     filmCardsMarkup(movies.results);
 
@@ -24,5 +26,7 @@ async function renderMarkupTrendMovies() {
     })
   } catch (error) {
     console.log(error);
-  }
+  } finally {
+    spinner.remove()
+  };
 }
