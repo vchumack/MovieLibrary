@@ -1,6 +1,4 @@
 import { refs } from './refs';
-import { setLocalWatched } from './modal-fetch';
-import { setLocalQueue } from './modal-fetch';
 import { getLocalStorageUser } from './googleAuth';
 import filmCardsMarkup from './film-cards-markup';
 import { MovieService } from './movie-api-service';
