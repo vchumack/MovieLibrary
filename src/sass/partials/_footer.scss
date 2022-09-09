@@ -25,5 +25,11 @@
 	&__link {
 		text-decoration: underline;
 		color: var(--footer-color);
+
+		transition: color 250ms var(--animation-function);
+	}
+	&__link:focus,
+	&__link:hover{
+		color: var(--accent-color);
 	}
 }

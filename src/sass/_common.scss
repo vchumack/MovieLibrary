@@ -102,6 +102,17 @@ body {
 	pointer-events: none;
 }
 
-.stop-scroll{
+.stop-scroll {
 	overflow: hidden;
+}
+
+::-webkit-scrollbar {
+	color: var(--accent-color);
+	background-color: var(--secondary-font);
+}
+
+::-webkit-scrollbar-thumb {
+	color: var(--accent-color);
+	background-color: var(--accent-color);
+	border-radius: 10px;
 }

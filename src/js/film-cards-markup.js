@@ -9,10 +9,13 @@ export default function filmCardsMarkup(films) {
 				: `https://via.placeholder.com/395x574`;
 			return `
         <li class="films__item" id=${id}>
+        <a href="#" class="films__item--link">
             <img 
                 class="films__img" 
                 src=${imageSrc} 
-                alt="${title}">
+                alt="${title}"
+              />
+        </a>
             <h3 class="films__title">${title}</h3>
             <p class="films__descr">${genreNames.join(
 							', '

@@ -36,6 +36,13 @@ async function onIdSearch(idParams) {
 function onAddToWatched(e) {
 	if (!getLocalStorageUser(KEY)) {
 		return Notify.failure('The service is unavailable until you authorize');
+
+		const addToWatchBtn = document
+		.querySelector('.modal__button--watched');
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_WATCHED.push(filmIdForLocal);
+		setLocalWatched();
+		addToWatchBtn.disabled = true;
 	}
 
 	Notify.success('Film is successfully added to your collection');
@@ -55,8 +62,18 @@ function onAddToWatched(e) {
 }
 
 function onAddToQueue(e) {
+
 	if (!getLocalStorageUser(KEY)) {
 		return Notify.failure('The service is unavailable until you authorize');
+    
+		const addToQueue = document
+		.querySelector('.modal__button--queue');
+		const filmIdForLocal = e.target.closest('button').id;
+		LOCAL_QUEUE.push(filmIdForLocal);
+		setLocalQueue();
+		addToQueue.disabled = true;
+	} catch (error) {
+		console.log(error);
 	}
 
 	Notify.success('Film is successfully added to your collection');
@@ -91,13 +108,13 @@ function modalMarkup(film) {
 			original_title,
 			vote_average,
 			vote_count,
-			backdrop_path,
+			poster_path,
 			id,
 			overview,
 			popularity,
 		}) => {
-			const imageSrc = backdrop_path
-				? `https://image.tmdb.org/t/p/w500/${backdrop_path}`
+			const imageSrc = poster_path
+				? `https://image.tmdb.org/t/p/w500/${poster_path}`
 				: 'https://via.placeholder.com/395x574';
 			return `
         <img
