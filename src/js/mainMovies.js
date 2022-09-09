@@ -10,7 +10,7 @@ const movieService = new MovieService();
 
 renderMarkupTrendMovies();
 
-async function renderMarkupTrendMovies() {
+export async function renderMarkupTrendMovies() {
   const spinner = getSpinner();
   try {
     refs.filmsUl.append(spinner);
