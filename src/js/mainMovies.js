@@ -4,6 +4,7 @@ import {
 import filmCardsMarkup from './film-cards-markup';
 import renderPaginatorMarkup from './paginator-markup';
 import getSpinner from './loaderSpinner';
+import { refs } from './refs';
 
 const movieService = new MovieService();
 
