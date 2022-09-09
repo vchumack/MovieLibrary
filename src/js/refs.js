@@ -9,7 +9,4 @@ export const refs = {
 	modalClose: document.querySelector('[data-modal-close]'),
 	modalWrapper: document.querySelector('.modal--wrapper'),
 	paginator: document.querySelector('#pagination'),
-	btnWatched: document.querySelector('.btn-watched'),
-	btnQueue: document.querySelector('.btn-queue'),
-	paginatorBox: document.querySelector('#section-paginator'),
 };

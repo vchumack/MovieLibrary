@@ -1,11 +1,7 @@
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { MovieService } from './movie-api-service';
 import filmCardsMarkup from './film-cards-markup';
 import { refs } from './refs';
 import renderPaginatorMarkup from './paginator-markup';
-import { onBtnWatchedClick, onBtnQueueClick } from './renderQueueWatched';
-import { getLocalStorageUser } from './googleAuth';
-import { KEY } from './googleAuth';
 
 const headerDivBox = document.querySelector('.js-box');
 onRenderHeaderInput();
@@ -21,19 +17,8 @@ const movieService = new MovieService();
 
 function onLinkLibraryClick(e) {
 	e.preventDefault();
-	if (!getLocalStorageUser(KEY)) {
-		return Notify.failure('The service is unavailable until you authorize');
-	}
 	onClearHeaderInput();
 	onRenderHeaderBtn();
-	onBtnWatchedClick();
-
-	//todo
-	const btnWatched = document.querySelector('.btn-watched');
-	const btnQueue = document.querySelector('.btn-queue');
-	btnWatched.addEventListener('click', onBtnWatchedClick);
-	btnQueue.addEventListener('click', onBtnQueueClick);
-
 	header.classList.add('header--bgc');
 
 	headerLinkLibrary.classList.add('nav-list__link--active');
