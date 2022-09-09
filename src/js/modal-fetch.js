@@ -89,11 +89,11 @@ function onAddToQueue(e) {
 	setLocalQueue();
 }
 
-export function setLocalWatched() {
+function setLocalWatched() {
 	localStorage.setItem('LOCAL_WATCHED', JSON.stringify(LOCAL_WATCHED));
 }
 
-export function setLocalQueue() {
+function setLocalQueue() {
 	localStorage.setItem('LOCAL_QUEUE', JSON.stringify(LOCAL_QUEUE));
 }
 
