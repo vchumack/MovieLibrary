@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { renderMarkupTrendMovies } from './mainMovies';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { refs } from './refs';
 
@@ -94,6 +95,7 @@ function onLogoutClick() {
 	googleAuthDiv.classList.remove('google-box');
 	document.querySelector('.js-box-out').remove();
 	googleAuthBtn.classList.remove('button-hidden');
+  renderMarkupTrendMovies();
 }
 
 function checkLocalStorageUserData() {
