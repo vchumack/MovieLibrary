@@ -287,6 +287,8 @@ input:-webkit-autofill {
    width: 12px;
    height: 12px;
 
+  transition: transform 250ms var(--animation-function);
+  
    @media screen and (max-width: 767px) {
       right: 0;
    }
@@ -299,6 +301,10 @@ input:-webkit-autofill {
    @media screen and (min-width: 1280px) {
       right: 413px;
    }
+}
+.header__submit:focus,
+.header__submit:hover{
+   transform: scale(1.5);
 }
 
 .btn-watched,
