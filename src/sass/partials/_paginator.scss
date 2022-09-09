@@ -1,43 +1,57 @@
-.paginator {
-	display: flex;
-	&__button {
-		width: 40px;
-		height: 40px;
-		padding: 12px;
-		background: #f7f7f7;
-        border-radius: 5px;
-        border: none;
-        cursor: pointer;
+// .paginator {
+// 	display: flex !important;
+//     align-items: center !important;
+//     justify-content: center !important;
+// 	&__button {
+// 		width: 40px;
+// 		height: 40px;
+// 		padding: 12px;
+// 		background: #f7f7f7;
+//         border-radius: 5px;
+//         border: none;
+//         cursor: pointer;
 
-        font-size: 12px;
-        line-height: 1.3;
-	}
+//         font-size: 12px;
+//         line-height: 1.3;
+// 	}
 
-	&__button:hover,
-	&__button:focus {
-		background-color: var(--accent-color);
-        color: var(	--secondary-font);
-        border: none;
-	}
+// 	&__button:hover,
+// 	&__button:focus {
+// 		background-color: var(--accent-color);
+//         color: var(	--secondary-font);
+//         border: none;
+// 	}
 
-	&__page {
-        border-radius: 5px;
-        border: none;
-        background-color: #fff;
+// 	&__page {
+//         border-radius: 5px;
+//         border: none;
+//         background-color: #fff;
 
-        font-size: 12px;
-        line-height: 0.75;
-	}
+//         font-size: 12px;
+//         line-height: 0.75;
+// 	}
 
-	&__page:hover,
-	&__page:focus {
-		background-color: var(--accent-color);
-        color: var(	--secondary-font);
-	}
+// 	&__page:hover,
+// 	&__page:focus {
+// 		background-color: var(--accent-color);
+//         color: var(	--secondary-font);
+// 	}
 
-    &__page--active{
-        background-color: var(--accent-color);
-        color: var(	--secondary-font);
-    }
+//     &__page--active{
+//         background-color: var(--accent-color);
+//         color: var(	--secondary-font);
+//     }
+// }
+
+.tui-pagination{
+    margin: 0 auto !important;
 }
 
+.tui-is-selected {
+    background-color: var(--accent-color) !important;
+}
+
+.tui-page-btn{
+    border-radius: 4px !important;
+    border: 1px solid transparent !important;
+}
