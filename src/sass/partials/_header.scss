@@ -40,7 +40,7 @@
 
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       background-image: url('../images/header/header1PC.jpg');
 
       @media (min-device-pixel-ratio: 2),
@@ -88,7 +88,7 @@ header.header--bgc {
       }
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       background-image: linear-gradient(to right, rgba(0, 0, 0, 0.56), rgba(0, 0, 0, 0.56)), url('../images/header/header2PC.jpg');
 
       @media (min-device-pixel-ratio: 2),
@@ -122,8 +122,8 @@ header.header--bgc {
    @media screen and (min-width: 768px) and (max-width: 1199px) {}
 
    // от 1200 только пк 
-   @media screen and (min-width: 1200px) {
-      max-width: 1200px;
+   @media screen and (min-width: 1280px) {
+      max-width: 1280px;
    }
 
 }
@@ -143,7 +143,7 @@ header.header--bgc {
       margin-bottom: 40px;
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       margin-bottom: 40px;
    }
 }
@@ -160,7 +160,7 @@ header.header--bgc {
       margin-right: 80px;
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       margin-right: 500px;
    }
 
@@ -262,7 +262,7 @@ input:-webkit-autofill {
    }
 
    // от 1200 только пк 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       max-width: 394px;
    }
 
@@ -295,7 +295,7 @@ input:-webkit-autofill {
       right: 182px;
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       right: 370px;
    }
 
@@ -328,7 +328,7 @@ input:-webkit-autofill {
       height: 44px;
    }
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       width: 148px;
       height: 42px;
    }
@@ -356,7 +356,7 @@ input:-webkit-autofill {
    }
 
    // от 1200 только пк 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       margin-right: 16px;
    }
 }
@@ -394,7 +394,7 @@ input:-webkit-autofill {
 
 
 
-   @media screen and (min-width: 1200px) {
+   @media screen and (min-width: 1280px) {
       display: flex;
    }
 
@@ -470,7 +470,7 @@ input:-webkit-autofill {
       margin-bottom: 5px;
    }
 
-   @media screen and (min-width: 1200px) {}
+   @media screen and (min-width: 1280px) {}
 }
 
 

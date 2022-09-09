@@ -1,23 +1,13 @@
-import {
-  refs
-} from './refs';
-import {
-  onModalOpen
-} from './modal-fetch'
+import { refs } from './refs';
+import { onModalOpen } from './modal-fetch';
 
 export default function filmCardsMarkup(films) {
-  const items = films.map(
-    ({
-      genreNames,
-      title,
-      release_date = '--',
-      poster_path,
-      id
-    }) => {
-      const imageSrc = poster_path ?
-        `https://image.tmdb.org/t/p/w500/${poster_path}` :
-        `https://via.placeholder.com/395x574`;
-      return `
+	const items = films.map(
+		({ genreNames, title, release_date = '--', poster_path, id }) => {
+			const imageSrc = poster_path
+				? `https://image.tmdb.org/t/p/w500/${poster_path}`
+				: `https://via.placeholder.com/395x574`;
+			return `
         <li class="films__item" id=${id}>
             <img 
                 class="films__img" 
@@ -29,10 +19,9 @@ export default function filmCardsMarkup(films) {
 						)} | ${release_date.slice(0, 4)}</p>
         </li>
         `;
-    }
-  );
+		}
+	);
 
-  refs.filmsUl.innerHTML = items.join('');
-  refs.filmsUl.addEventListener('click', onModalOpen)
-
-};
+	refs.filmsUl.innerHTML = items.join('');
+	refs.filmsUl.addEventListener('click', onModalOpen);
+}
