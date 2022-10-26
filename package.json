@@ -5,7 +5,7 @@
   "homepage": "https://lluitiy.github.io/Movie-Library/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Movie-Library/"
+    "build": "parcel build src/*.html --public-url /sparta/"
   },
   "repository": {
     "type": "git",
