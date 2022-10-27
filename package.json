@@ -2,10 +2,10 @@
   "name": "parcel-project-template",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://lluitiy.github.io/Movie-Library/",
+  "homepage": "https://vchumack.github.io/MovieLibrary/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /Movie-Library/"
+    "build": "parcel build src/*.html --public-url /MovieLibrary/"
   },
   "repository": {
     "type": "git",
