@@ -2,10 +2,10 @@
   "name": "Super Movie Library",
   "version": "2.0.0",
   "description": "",
-  "homepage": "https://vchumack.github.io/movieLibrary/",
+  "homepage": "https://vchumack.github.io/filmoteka/",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /movieLibrary/"
+    "build": "parcel build src/*.html --public-url /filmoteka/"
   },
   "repository": {
     "type": "git",
